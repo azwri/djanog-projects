@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itemd {{ item.name }}</title>
+</head>
+
+<body>
+    <a href="{% url 'app_food:index' %}">Back</a>
+    <h3>{{ item.name }}</h3>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+</body>
+
+</html>
