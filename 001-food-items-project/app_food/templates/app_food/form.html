@@ -1,0 +1,31 @@
+{% extends 'tailwind/index.html' %}
+
+{% block content %}
+
+
+    
+
+<form class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-4">
+        <label for="name" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Name:</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}" required class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+    </div>
+    <div class="mb-4">
+        <label for="description" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Description:</label>
+        <textarea id="description" name="description" required>{{ item.description }}</textarea>
+    </div>
+    <div class="mb-4">
+        <label for="image" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="Current Image" style="max-width: 200px;">
+        {% endif %}
+    </div>
+    <div class="mb-4">
+        <label for="price" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Price:</label>
+        <input type="number" id="price" name="price" value="{{ item.price }}" required class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}

@@ -1,23 +1,36 @@
 {% extends 'tailwind/index.html' %}
 
 {% block content %}
+<button class="btn btn-primary mb-4">
+  <a href="{% url 'app_food:create' %}">Add Item</a>
+</button>
 
-{% include 'app_food/navbar.html' %}
+<div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
 
+  <!-- product - start -->
+{% for item in items %}
+<div>
+  <a href="{% url 'app_food:detail' item.id %}"
+    class="group relative flex h-96 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg">
+    
+    {% if item.image %}
+    <img src="{{ item.image.url }}" loading="lazy" alt="Photo by Austin Wade"
+    class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+    {% else %}
+      <img src="https://via.placeholder.com/300" alt="Placeholder Image"
+      class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+    {% endif %}
+    
 
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {% for item in items %}
-        <div class="card w-96 bg-base-100 card-xl shadow-sm">
-            <div class="card-body">
-              <h2 class="card-title">{{ item.name }}</h2>
-              <p>{{ item.description }}</p>
-              <div class="justify-end card-actions">
-                <a class="btn btn-primary" href="{% url 'app_food:item_detail' item.id %}">Visit</a>
-              </div>
-            </div>
-        </div>
-        {% endfor %}
+    <div class="relative flex w-full flex-col rounded-lg bg-white p-4 text-center">
+      <span class="text-gray-500">Food Type</span>
+      <span class="text-lg font-bold text-gray-800 lg:text-xl">{{ item.name }}</span>
     </div>
+  </a>
+</div>
+{% endfor %}
+  <!-- product - end -->
+</div>
 
 
 
