@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itmes</title>
-</head>
-<body>
-    <h2>Food Items</h2>
-    <ul>
+{% extends 'tailwind/index.html' %}
+
+{% block content %}
+
+{% include 'app_food/navbar.html' %}
+
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {% for item in items %}
-            <a href="{% url 'app_food:item_detail' item.id %}">
-                <li>{{ item.name }}</li>
-            </a>
+        <div class="card w-96 bg-base-100 card-xl shadow-sm">
+            <div class="card-body">
+              <h2 class="card-title">{{ item.name }}</h2>
+              <p>{{ item.description }}</p>
+              <div class="justify-end card-actions">
+                <a class="btn btn-primary" href="{% url 'app_food:item_detail' item.id %}">Visit</a>
+              </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-    
-</body>
-</html>
+    </div>
+
+
+
+{% endblock content %}

@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'tailwind/index.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itemd {{ item.name }}</title>
-</head>
 
-<body>
-    <a href="{% url 'app_food:index' %}">Back</a>
-    <h3>{{ item.name }}</h3>
-    <p>{{ item.description }}</p>
-    <p>{{ item.price }}</p>
-</body>
 
-</html>
+
+{% block content %}
+{% include 'app_food/navbar.html' %}
+
+<div class="mx-auto w-96"
+<div class="card lg:card-side bg-base-100 shadow-sm">
+    <figure>
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
+        alt="Album" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">{{ item.name }}</h2>
+      <p>{{ item.description }}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary">Listen</button>
+      </div>
+    </div>
+  </div>
+    
+{% endblock content %}
+    
