@@ -57,3 +57,50 @@ Feel free to modify the project structure, settings, and dependencies to suit yo
 - Always activate the virtual environment before running any Django commands.
 
 Happy coding!
+
+## Update
+- to add tailwind
+```
+ npm install 
+ # or
+ npm install tailwindcss @tailwindcss/cli
+ # then
+ mkdir -p static/tailwind
+ touch static/tailwind/input.css
+ touch static/tailwind/output.css
+ mkdir -p templates/tailwind
+ touch templates/tailwind/index.html
+ echo '@import "tailwindcss";' > static/tailwind/input.css
+```
+
+- add in templates/tailwind/index.html
+
+```
+<link href="{% static 'tailwind/output.css' %}" rel="stylesheet">
+```
+
+- add in settings.py
+
+```
+'DIRS': [BASE_DIR / 'templates'],
+
+
+STATICFILES_DIRS = [BASE_DIR / "static"]
+```
+
+- add in urls.py for static files
+
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
+
+- run to compile
+
+```
+  npx @tailwindcss/cli -i ./static/tailwind/input.css -o ./static/tailwind/output.css --watch
+```
