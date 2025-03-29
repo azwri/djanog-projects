@@ -1,9 +1,11 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
-from .models import Profile
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth import get_user_model
+from .models import Profile
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 
+User = get_user_model()
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -14,6 +16,16 @@ class ProfileForm(ModelForm):
             'displayname' : forms.TextInput(attrs={'placeholder': 'Add display name'}),
             'info' : forms.Textarea(attrs={'rows':3, 'placeholder': 'Add information'})
         }
+        
+        
+class EmailForm(ModelForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['email']
+
+
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -26,9 +38,3 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ("email",)
-
-
-class UserRegistrationForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = ['email', 'password1', 'password2']
